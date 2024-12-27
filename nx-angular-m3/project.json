@@ -1,29 +1,28 @@
 {
-  "name": "nx-portfolio",
-  "$schema": "node_modules/nx/schemas/project-schema.json",
-  "includedScripts": [],
+  "name": "nx-angular-m3",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "./src",
-  "tags": [],
+  "sourceRoot": "nx-angular-m3/src",
+  "tags": ["scope:frontend", "type:application"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/nx-portfolio",
-        "index": "./src/index.html",
-        "browser": "./src/main.ts",
+        "outputPath": "dist/nx-angular-m3",
+        "index": "nx-angular-m3/src/index.html",
+        "browser": "nx-angular-m3/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "tsconfig.app.json",
+        "tsConfig": "nx-angular-m3/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "nx-angular-m3/public"
           }
         ],
-        "styles": ["./src/styles.scss"],
+        "styles": ["nx-angular-m3/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -54,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "nx-portfolio:build:production"
+          "buildTarget": "nx-angular-m3:build:production"
         },
         "development": {
-          "buildTarget": "nx-portfolio:build:development"
+          "buildTarget": "nx-angular-m3:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,28 +64,25 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "nx-portfolio:build"
+        "buildTarget": "nx-angular-m3:build"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["./src"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "jest.config.app.ts"
+        "jestConfig": "nx-angular-m3/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "nx-portfolio:build",
+        "buildTarget": "nx-angular-m3:build",
         "port": 4200,
-        "staticFilePath": "dist/nx-portfolio/browser",
+        "staticFilePath": "dist/nx-angular-m3/browser",
         "spa": true
       }
     }

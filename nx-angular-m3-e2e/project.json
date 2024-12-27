@@ -1,0 +1,9 @@
+{
+  "name": "nx-angular-m3-e2e",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "nx-angular-m3-e2e/src",
+  "implicitDependencies": ["nx-angular-m3"],
+  "// targets": "to see all targets run: nx show project nx-angular-m3-e2e --web",
+  "targets": {}
+}
