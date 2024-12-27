@@ -15,22 +15,31 @@ module.exports = [
       '**/*.cjs',
       '**/*.mjs',
     ],
-    // Override or add rules here
-    rules: {},
-  },
-  ...nx.configs['flat/angular'],
-  ...nx.configs['flat/angular-template'],
-  {
-    files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
+      // Enforce Module Boundaries
+      '@nx/enforce-module-boundaries': [
         'error',
         {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
+          enforceBuildableLibDependency: true,
+          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
+          depConstraints: [
+            {
+              sourceTag: '*',
+              onlyDependOnLibsWithTags: ['*'],
+            },
+          ],
         },
       ],
+
+      // Enforce Non-Standalone Components
+      '@angular-eslint/prefer-standalone': [
+        'error',
+        {
+          allow: false, // Standalone components are not allowed
+        },
+      ],
+
+      // Component Selector Rules
       '@angular-eslint/component-selector': [
         'error',
         {
@@ -39,11 +48,28 @@ module.exports = [
           style: 'kebab-case',
         },
       ],
+
+      // Directive Selector Rules
+      '@angular-eslint/directive-selector': [
+        'error',
+        {
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
+        },
+      ],
+
+      // Enforce File Naming Convention
+      'filenames/match-regex': ['error', '^[a-z0-9.-]+$', true],
     },
   },
+  ...nx.configs['flat/angular'],
+  ...nx.configs['flat/angular-template'],
   {
     files: ['**/*.html'],
-    // Override or add rules here
-    rules: {},
+    rules: {
+      // Enforce Best Practices for Templates
+      '@angular-eslint/template/no-negated-async': 'error',
+    },
   },
 ];
